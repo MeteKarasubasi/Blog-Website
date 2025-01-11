@@ -1,0 +1,134 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}{{ post.title }} - Blog{% endblock %}
+
+{% block content %}
+<article class="blog-post">
+    {% if post.featured_image %}
+    <img src="{{ post.featured_image.url }}" class="img-fluid rounded mb-4" alt="{{ post.title }}">
+    {% endif %}
+
+    <h1 class="mb-3">{{ post.title }}</h1>
+
+    <div class="mb-3">
+        <span class="badge bg-primary">{{ post.category.name }}</span>
+        {% for tag in post.tags.all %}
+        <span class="badge bg-secondary">{{ tag.name }}</span>
+        {% endfor %}
+    </div>
+
+    <p class="text-muted">
+        <small>
+            {{ post.published_date|date:"d F Y" }} tarihinde 
+            {{ post.author.get_full_name|default:post.author.username }} tarafından yazıldı
+        </small>
+    </p>
+
+    <div class="blog-content">
+        {{ post.content|safe|linebreaks }}
+    </div>
+</article>
+
+<!-- Yorumlar Kartı -->
+<div class="card mt-5">
+    <div class="card-header bg-light">
+        <h3 class="mb-0">
+            <i class="far fa-comments me-2"></i>
+            Yorumlar ({{ comments.count }})
+        </h3>
+    </div>
+    <div class="card-body">
+        {% if comments %}
+            {% for comment in comments %}
+            <div class="comment mb-4">
+                <div class="d-flex align-items-center mb-2">
+                    <h5 class="mb-0 me-2">{{ comment.name }}</h5>
+                    <small class="text-muted">{{ comment.created_date|date:"d F Y, H:i" }}</small>
+                </div>
+                <p class="mb-0">{{ comment.content|linebreaks }}</p>
+                {% if not forloop.last %}
+                <hr class="my-4">
+                {% endif %}
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-muted mb-0">Henüz yorum yapılmamış. İlk yorumu siz yapın!</p>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Yorum Yapma Kartı -->
+<div class="card mt-4">
+    <div class="card-header bg-light">
+        <h3 class="mb-0">
+            <i class="fas fa-pen me-2"></i>
+            Yorum Yap
+        </h3>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            {% if user.is_authenticated %}
+                <p class="text-muted mb-3">
+                    <small>{{ user.get_full_name|default:user.username }} olarak yorum yapıyorsunuz.</small>
+                </p>
+                <div class="mb-3">
+                    <label for="content" class="form-label">Yorumunuz</label>
+                    {{ comment_form.content }}
+                </div>
+            {% else %}
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="name" class="form-label">İsim</label>
+                        {{ comment_form.name }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="email" class="form-label">E-posta</label>
+                        {{ comment_form.email }}
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">Yorumunuz</label>
+                    {{ comment_form.content }}
+                </div>
+            {% endif %}
+            <button type="submit" class="btn btn-primary">
+                Yorum Gönder
+                <i class="fas fa-paper-plane ms-1"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
+{% if similar_posts %}
+<div class="card mt-4">
+    <div class="card-header bg-light">
+        <h3 class="mb-0">
+            <i class="fas fa-link me-2"></i>
+            Benzer Yazılar
+        </h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            {% for post in similar_posts %}
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    {% if post.featured_image %}
+                    <img src="{{ post.featured_image.url }}" class="card-img-top" alt="{{ post.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ post.title }}</h5>
+                        <p class="card-text">{{ post.excerpt|truncatewords:20 }}</p>
+                        <a href="{% url 'blog:post_detail' post.slug %}" class="btn btn-sm btn-primary">
+                            Devamını Oku
+                            <i class="fas fa-arrow-right ms-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock %} 

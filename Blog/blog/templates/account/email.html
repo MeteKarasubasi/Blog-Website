@@ -1,0 +1,86 @@
+{% extends "blog/base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}E-posta Ayarları{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-body p-4">
+        <h1 class="h3 mb-4">{% trans "E-posta Ayarları" %}</h1>
+
+        {% if user.emailaddress_set.all %}
+        <p class="text-muted mb-4">{% trans 'Aşağıdaki e-posta adreslerinden birini birincil olarak ayarlayabilir veya kaldırabilirsiniz:' %}</p>
+
+        <form action="{% url 'account_email' %}" class="email_list" method="post">
+            {% csrf_token %}
+            <fieldset class="blockLabels">
+                {% for emailaddress in user.emailaddress_set.all %}
+                <div class="form-check mb-3">
+                    <input id="email_radio_{{ forloop.counter }}" type="radio" name="email" 
+                           class="form-check-input"
+                           {% if emailaddress.primary or user.emailaddress_set.count == 1 %}checked="checked"{% endif %} 
+                           value="{{ emailaddress.email }}"/>
+
+                    <label for="email_radio_{{ forloop.counter }}" class="form-check-label">
+                        {{ emailaddress.email }}
+                        {% if emailaddress.verified %}
+                        <span class="badge bg-success">{% trans "Doğrulandı" %}</span>
+                        {% else %}
+                        <span class="badge bg-warning text-dark">{% trans "Doğrulanmadı" %}</span>
+                        {% endif %}
+                        {% if emailaddress.primary %}<span class="badge bg-primary">{% trans "Birincil" %}</span>{% endif %}
+                    </label>
+                </div>
+                {% endfor %}
+
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="submit" name="action_primary">
+                        <i class="fas fa-check-circle me-1"></i>{% trans 'Birincil Yap' %}
+                    </button>
+                    <button class="btn btn-success" type="submit" name="action_send">
+                        <i class="fas fa-paper-plane me-1"></i>{% trans 'Doğrulama E-postası Gönder' %}
+                    </button>
+                    <button class="btn btn-danger" type="submit" name="action_remove">
+                        <i class="fas fa-trash me-1"></i>{% trans 'Kaldır' %}
+                    </button>
+                </div>
+            </fieldset>
+        </form>
+
+        {% else %}
+        <p class="text-muted">{% trans 'Henüz bir e-posta adresi eklemediniz.' %}</p>
+        {% endif %}
+
+        <hr class="my-4">
+
+        <h2 class="h4 mb-4">{% trans "E-posta Adresi Ekle" %}</h2>
+
+        <form method="post" action="{% url 'account_email' %}" class="add_email">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="d-grid">
+                <button class="btn btn-primary" name="action_add" type="submit">
+                    <i class="fas fa-plus me-1"></i>{% trans "E-posta Ekle" %}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript">
+(function() {
+    var message = "{% trans 'Bu işlemi gerçekten yapmak istediğinizden emin misiniz?' %}";
+    var actions = document.getElementsByName('action_remove');
+    if (actions.length) {
+        actions[0].addEventListener("click", function(e) {
+            if (!confirm(message)) {
+                e.preventDefault();
+            }
+        });
+    }
+})();
+</script>
+{% endblock %} 

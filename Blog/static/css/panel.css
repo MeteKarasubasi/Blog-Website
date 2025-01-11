@@ -1,0 +1,214 @@
+/* Panel Stilleri */
+:root {
+    --panel-primary: #4f46e5;
+    --panel-secondary: #14b8a6;
+    --panel-success: #22c55e;
+    --panel-warning: #eab308;
+    --panel-danger: #ef4444;
+    --panel-info: #3b82f6;
+    --panel-bg: #f8fafc;
+    --panel-sidebar-bg: #1e293b;
+    --panel-sidebar-text: #e2e8f0;
+}
+
+body {
+    background-color: var(--panel-bg);
+}
+
+/* Sidebar */
+.panel-sidebar {
+    background-color: var(--panel-sidebar-bg);
+    color: var(--panel-sidebar-text);
+    min-height: 100vh;
+    padding: 1.5rem;
+    position: fixed;
+    width: 250px;
+    transition: all 0.3s ease;
+}
+
+.panel-sidebar .navbar-brand {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    display: block;
+}
+
+.panel-sidebar .nav-link {
+    color: var(--panel-sidebar-text);
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+.panel-sidebar .nav-link:hover,
+.panel-sidebar .nav-link.active {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.panel-sidebar .nav-link i {
+    width: 20px;
+    text-align: center;
+    margin-right: 0.75rem;
+}
+
+/* Ana İçerik */
+.panel-content {
+    margin-left: 250px;
+    padding: 2rem;
+}
+
+/* İstatistik Kartları */
+.stat-card {
+    background: white;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.stat-card .stat-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.stat-card .stat-title {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.stat-card .stat-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+/* Tablo Stilleri */
+.panel-table {
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    overflow: hidden;
+}
+
+.panel-table .table {
+    margin-bottom: 0;
+}
+
+.panel-table th {
+    background-color: #f8fafc;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+}
+
+.panel-table td {
+    vertical-align: middle;
+}
+
+/* Form Stilleri */
+.panel-form {
+    background: white;
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.panel-form .form-label {
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.panel-form .form-control,
+.panel-form .form-select {
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+}
+
+.panel-form .form-control:focus,
+.panel-form .form-select:focus {
+    border-color: var(--panel-primary);
+    box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.25);
+}
+
+/* Buton Stilleri */
+.btn-panel-primary {
+    background-color: var(--panel-primary);
+    border-color: var(--panel-primary);
+    color: white;
+}
+
+.btn-panel-primary:hover {
+    background-color: #4338ca;
+    border-color: #4338ca;
+    color: white;
+}
+
+.btn-panel-secondary {
+    background-color: var(--panel-secondary);
+    border-color: var(--panel-secondary);
+    color: white;
+}
+
+.btn-panel-secondary:hover {
+    background-color: #0d9488;
+    border-color: #0d9488;
+    color: white;
+}
+
+/* Badge Stilleri */
+.badge-status {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+}
+
+.badge-status.draft {
+    background-color: #f3f4f6;
+    color: #4b5563;
+}
+
+.badge-status.published {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.badge-status.featured {
+    background-color: #dbeafe;
+    color: #1e40af;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .panel-sidebar {
+        transform: translateX(-100%);
+        z-index: 1000;
+    }
+
+    .panel-sidebar.show {
+        transform: translateX(0);
+    }
+
+    .panel-content {
+        margin-left: 0;
+        padding: 1rem;
+    }
+
+    .panel-form {
+        padding: 1rem;
+    }
+} 

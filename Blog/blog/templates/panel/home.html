@@ -1,0 +1,181 @@
+{% extends "panel/base.html" %}
+
+{% block title %}Ana Sayfa{% endblock %}
+
+{% block page_title %}Hoş Geldiniz, {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- Posts -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card card-dashboard primary h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Yazılar</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ post_count }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-file-alt fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'blog:panel_posts' %}" class="btn btn-primary btn-sm btn-icon">
+                    <i class="fas fa-arrow-right"></i>Detaylar
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Comments -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card card-dashboard success h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Yorumlar</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ comment_count }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-comments fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'blog:panel_comments' %}" class="btn btn-success btn-sm btn-icon">
+                    <i class="fas fa-arrow-right"></i>Detaylar
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Messages -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card card-dashboard warning h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Mesajlar</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ message_count }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-envelope fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'blog:panel_messages' %}" class="btn btn-warning btn-sm btn-icon">
+                    <i class="fas fa-arrow-right"></i>Detaylar
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Users -->
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card card-dashboard danger h-100">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">Kullanıcılar</div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ user_count }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-users fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="{% url 'blog:panel_users' %}" class="btn btn-danger btn-sm btn-icon">
+                    <i class="fas fa-arrow-right"></i>Detaylar
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Recent Posts -->
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold">Son Yazılar</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Başlık</th>
+                                <th>Kategori</th>
+                                <th>Tarih</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in recent_posts %}
+                            <tr>
+                                <td>{{ post.title }}</td>
+                                <td>{{ post.category.name }}</td>
+                                <td>{{ post.created_date|date:"d.m.Y" }}</td>
+                                <td>
+                                    <a href="{% url 'blog:panel_post_edit' post.id %}" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center">Henüz yazı eklenmemiş.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Comments -->
+    <div class="col-lg-6 mb-4">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="m-0 font-weight-bold">Son Yorumlar</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Yazar</th>
+                                <th>Yazı</th>
+                                <th>Tarih</th>
+                                <th>İşlemler</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for comment in recent_comments %}
+                            <tr>
+                                <td>{{ comment.name }}</td>
+                                <td>{{ comment.post.title }}</td>
+                                <td>{{ comment.created_date|date:"d.m.Y" }}</td>
+                                <td>
+                                    <a href="{% url 'blog:panel_comment_edit' comment.id %}" class="btn btn-sm btn-primary">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center">Henüz yorum yapılmamış.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

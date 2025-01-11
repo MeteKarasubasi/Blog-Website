@@ -1,0 +1,91 @@
+{% extends "blog/base.html" %}
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block title %}Giriş Yap{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="auth-form">
+                <h1>{% trans "Giriş Yap" %}</h1>
+
+                {% if messages %}
+                <div class="messages mb-4">
+                    {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <form class="login" method="POST" action="{% url 'account_login' %}">
+                    {% csrf_token %}
+                    
+                    {% if form.non_field_errors %}
+                    <div class="alert alert-error">
+                        {% for error in form.non_field_errors %}
+                        {{ error }}
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="mb-3">
+                        <label for="{{ form.login.id_for_label }}">{% trans "E-posta" %}</label>
+                        {{ form.login }}
+                        {% if form.login.errors %}
+                        <div class="errorlist">
+                            {% for error in form.login.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="{{ form.password.id_for_label }}">{% trans "Şifre" %}</label>
+                        {{ form.password }}
+                        {% if form.password.errors %}
+                        <div class="errorlist">
+                            {% for error in form.password.errors %}
+                            {{ error }}
+                            {% endfor %}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mb-3 form-check">
+                        {{ form.remember }}
+                        <label class="form-check-label" for="{{ form.remember.id_for_label }}">
+                            {% trans "Beni hatırla" %}
+                        </label>
+                    </div>
+
+                    {% if redirect_field_value %}
+                    <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+
+                    <button class="btn btn-primary" type="submit">{% trans "Giriş Yap" %}</button>
+
+                    <div class="mt-3 text-center">
+                        <a href="{% url 'account_reset_password' %}">{% trans "Şifremi unuttum" %}</a>
+                    </div>
+
+                    <div class="divider">
+                        <span>veya</span>
+                    </div>
+
+                    <div class="text-center">
+                        <p class="mb-0">
+                            {% trans "Hesabınız yok mu?" %}
+                            <a href="{{ signup_url }}">{% trans "Kayıt ol" %}</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

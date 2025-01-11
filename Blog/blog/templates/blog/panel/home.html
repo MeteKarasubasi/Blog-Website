@@ -1,0 +1,130 @@
+{% extends 'blog/panel/base.html' %}
+
+{% block title %}Ana Sayfa - Yönetim Paneli{% endblock %}
+
+{% block page_title %}Genel Bakış{% endblock %}
+
+{% block content %}
+<div class="row g-4">
+    <!-- İstatistikler -->
+    <div class="col-md-4">
+        <div class="card bg-primary text-white">
+            <div class="card-body">
+                <h5 class="card-title">Toplam Yazı</h5>
+                <p class="card-text display-4">{{ total_posts }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success text-white">
+            <div class="card-body">
+                <h5 class="card-title">Toplam Yorum</h5>
+                <p class="card-text display-4">{{ total_comments }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-info text-white">
+            <div class="card-body">
+                <h5 class="card-title">Toplam Mesaj</h5>
+                <p class="card-text display-4">{{ total_messages }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Son Eklenen Yazılar -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Son Eklenen Yazılar</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-flush">
+                    {% for post in recent_posts %}
+                    <a href="{% url 'blog:panel_post_edit' post.id %}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">{{ post.title }}</h6>
+                            <small>{{ post.created_date|date:"d.m.Y" }}</small>
+                        </div>
+                        <small class="text-muted">{{ post.category.name }}</small>
+                    </a>
+                    {% empty %}
+                    <p class="text-muted mb-0">Henüz yazı eklenmemiş.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Son Yorumlar -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Son Yorumlar</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-flush">
+                    {% for comment in recent_comments %}
+                    <a href="{% url 'blog:panel_comment_edit' comment.id %}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">{{ comment.name }}</h6>
+                            <small>{{ comment.created_date|date:"d.m.Y" }}</small>
+                        </div>
+                        <p class="mb-1">{{ comment.content|truncatechars:100 }}</p>
+                        <small class="text-muted">{{ comment.post.title }}</small>
+                    </a>
+                    {% empty %}
+                    <p class="text-muted mb-0">Henüz yorum yapılmamış.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Kategori İstatistikleri -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Kategoriler</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-flush">
+                    {% for category in categories_with_counts %}
+                    <a href="{% url 'blog:panel_category_edit' category.id %}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-0">{{ category.name }}</h6>
+                            <span class="badge bg-primary rounded-pill">{{ category.post_count }}</span>
+                        </div>
+                    </a>
+                    {% empty %}
+                    <p class="text-muted mb-0">Henüz kategori eklenmemiş.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Etiket İstatistikleri -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">Etiketler</h5>
+            </div>
+            <div class="card-body">
+                <div class="list-group list-group-flush">
+                    {% for tag in tags_with_counts %}
+                    <a href="{% url 'blog:panel_tag_edit' tag.id %}" class="list-group-item list-group-item-action">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-0">{{ tag.name }}</h6>
+                            <span class="badge bg-primary rounded-pill">{{ tag.post_count }}</span>
+                        </div>
+                    </a>
+                    {% empty %}
+                    <p class="text-muted mb-0">Henüz etiket eklenmemiş.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

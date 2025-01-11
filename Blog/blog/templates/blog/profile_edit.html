@@ -1,0 +1,338 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}Profili Düzenle - {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card profile-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h2 class="mb-0">Profili Düzenle</h2>
+                    <a href="{% url 'blog:profile' %}" class="btn btn-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>Profile Dön
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <img src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}" 
+                             alt="{{ user.username }}" 
+                             class="profile-avatar mb-3">
+                        <h3>{{ user.username }}</h3>
+                        <p class="text-muted">{{ user.email }}</p>
+                    </div>
+                    
+                    <form method="POST" enctype="multipart/form-data" class="profile-form">
+                        {% csrf_token %}
+                        
+                        <div class="row">
+                            <div class="col-md-12 mb-4">
+                                <h5 class="border-bottom pb-2">Temel Bilgiler</h5>
+                                <div class="mb-3">
+                                    <label for="{{ form.avatar.id_for_label }}" class="form-label">{{ form.avatar.label }}</label>
+                                    {{ form.avatar }}
+                                    {% if form.avatar.help_text %}
+                                    <div class="form-text">{{ form.avatar.help_text }}</div>
+                                    {% endif %}
+                                    {% if form.avatar.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.avatar.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.bio.id_for_label }}" class="form-label">{{ form.bio.label }}</label>
+                                    {{ form.bio }}
+                                    {% if form.bio.help_text %}
+                                    <div class="form-text">{{ form.bio.help_text }}</div>
+                                    {% endif %}
+                                    {% if form.bio.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.bio.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <h5 class="border-bottom pb-2">Kişisel Bilgiler</h5>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.birth_date.id_for_label }}" class="form-label">{{ form.birth_date.label }}</label>
+                                    {{ form.birth_date }}
+                                    {% if form.birth_date.help_text %}
+                                    <div class="form-text">{{ form.birth_date.help_text }}</div>
+                                    {% endif %}
+                                    {% if form.birth_date.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.birth_date.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.gender.id_for_label }}" class="form-label">{{ form.gender.label }}</label>
+                                    {{ form.gender }}
+                                    {% if form.gender.help_text %}
+                                    <div class="form-text">{{ form.gender.help_text }}</div>
+                                    {% endif %}
+                                    {% if form.gender.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.gender.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.phone.id_for_label }}" class="form-label">{{ form.phone.label }}</label>
+                                    {{ form.phone }}
+                                    {% if form.phone.help_text %}
+                                    <div class="form-text">{{ form.phone.help_text }}</div>
+                                    {% endif %}
+                                    {% if form.phone.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.phone.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.location.id_for_label }}" class="form-label">{{ form.location.label }}</label>
+                                    {{ form.location }}
+                                    {% if form.location.help_text %}
+                                    <div class="form-text">{{ form.location.help_text }}</div>
+                                    {% endif %}
+                                    {% if form.location.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.location.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <h5 class="border-bottom pb-2">Mesleki Bilgiler</h5>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.occupation.id_for_label }}" class="form-label">{{ form.occupation.label }}</label>
+                                    {{ form.occupation }}
+                                    {% if form.occupation.help_text %}
+                                    <div class="form-text">{{ form.occupation.help_text }}</div>
+                                    {% endif %}
+                                    {% if form.occupation.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.occupation.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.education.id_for_label }}" class="form-label">{{ form.education.label }}</label>
+                                    {{ form.education }}
+                                    {% if form.education.help_text %}
+                                    <div class="form-text">{{ form.education.help_text }}</div>
+                                    {% endif %}
+                                    {% if form.education.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.education.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.interests.id_for_label }}" class="form-label">{{ form.interests.label }}</label>
+                                    {{ form.interests }}
+                                    {% if form.interests.help_text %}
+                                    <div class="form-text">{{ form.interests.help_text }}</div>
+                                    {% endif %}
+                                    {% if form.interests.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.interests.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-12 mt-4">
+                                <h5 class="border-bottom pb-2">Web Siteleri & Sosyal Medya</h5>
+                                
+                                <div class="mb-3">
+                                    <label for="{{ form.website.id_for_label }}" class="form-label">{{ form.website.label }}</label>
+                                    {{ form.website }}
+                                    {% if form.website.help_text %}
+                                    <div class="form-text">{{ form.website.help_text }}</div>
+                                    {% endif %}
+                                    {% if form.website.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.website.errors %}{{ error }}{% endfor %}
+                                    </div>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="{{ form.facebook.id_for_label }}" class="form-label">{{ form.facebook.label }}</label>
+                                            {{ form.facebook }}
+                                            {% if form.facebook.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {% for error in form.facebook.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="{{ form.twitter.id_for_label }}" class="form-label">{{ form.twitter.label }}</label>
+                                            {{ form.twitter }}
+                                            {% if form.twitter.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {% for error in form.twitter.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="{{ form.instagram.id_for_label }}" class="form-label">{{ form.instagram.label }}</label>
+                                            {{ form.instagram }}
+                                            {% if form.instagram.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {% for error in form.instagram.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label for="{{ form.linkedin.id_for_label }}" class="form-label">{{ form.linkedin.label }}</label>
+                                            {{ form.linkedin }}
+                                            {% if form.linkedin.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {% for error in form.linkedin.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                        
+                                        <div class="mb-3">
+                                            <label for="{{ form.github.id_for_label }}" class="form-label">{{ form.github.label }}</label>
+                                            {{ form.github }}
+                                            {% if form.github.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {% for error in form.github.errors %}{{ error }}{% endfor %}
+                                            </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save me-2"></i>Değişiklikleri Kaydet
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Temel stil tanımlamaları */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+p, .p,
+.text-muted,
+.card-header *,
+.card-body * {
+    color: #fff !important;
+}
+
+/* Özel sınıf kombinasyonları */
+.card h2.mb-0,
+.card h2.h4.mb-4,
+.card p.text-muted,
+.card p.text-muted.mb-4,
+.card p.text-muted.mb-2,
+.card h5.border-bottom.pb-2,
+.card h2.h4,
+.card p.text,
+.settings h2.h4.mb-4,
+.settings p.text,
+.account h2.h4.mb-4,
+.account p.text {
+    color: #fff !important;
+}
+
+/* Form elemanları */
+.form-label,
+.form-text {
+    color: #fff !important;
+}
+
+/* Profil kartı içindeki tüm metin elemanları */
+.profile-card h1,
+.profile-card h2,
+.profile-card h3,
+.profile-card h4,
+.profile-card h5,
+.profile-card h6,
+.profile-card p,
+.profile-card span,
+.profile-card a:not(.btn) {
+    color: #fff !important;
+}
+
+/* Profil resmi */
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-light);
+}
+
+/* Kart stilleri */
+.profile-card {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Form stilleri */
+.profile-form {
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+.profile-form h5 {
+    margin-bottom: 1.5rem;
+}
+
+/* Form kontrolleri */
+.form-control {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #fff !important;
+}
+
+.form-control:focus {
+    background-color: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #fff !important;
+}
+
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* Select elementleri */
+select.form-control option {
+    background-color: #343a40;
+    color: #fff;
+}
+</style>
+{% endblock %} 

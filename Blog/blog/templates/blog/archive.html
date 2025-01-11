@@ -1,0 +1,95 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Arşiv - Blog{% endblock %}
+
+{% block content %}
+<div class="archive-page">
+    <h1 class="mb-4">Blog Arşivi</h1>
+    
+    {% regroup dates by year as year_list %}
+    
+    <div class="accordion" id="archiveAccordion">
+        {% for year in year_list %}
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading{{ year.grouper }}">
+                <button class="accordion-button {% if not forloop.first %}collapsed{% endif %}" 
+                        type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#collapse{{ year.grouper }}" 
+                        aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}" 
+                        aria-controls="collapse{{ year.grouper }}">
+                    {{ year.grouper }}
+                </button>
+            </h2>
+            <div id="collapse{{ year.grouper }}" 
+                 class="accordion-collapse collapse {% if forloop.first %}show{% endif %}" 
+                 aria-labelledby="heading{{ year.grouper }}" 
+                 data-bs-parent="#archiveAccordion">
+                <div class="accordion-body">
+                    {% regroup year.list by month as month_list %}
+                    {% for month in month_list %}
+                    <h5 class="mb-3">{{ month.list.0|date:"F" }}</h5>
+                    <ul class="list-unstyled ms-4 mb-4">
+                        {% for date in month.list %}
+                        {% for post in posts %}
+                        {% if post.published_date.year == year.grouper and post.published_date.month == month.grouper %}
+                        <li class="mb-2">
+                            <span class="text-muted">{{ post.published_date|date:"d" }}</span> - 
+                            <a href="{% url 'blog:post_detail' post.slug %}" class="text-decoration-none">
+                                {{ post.title }}
+                            </a>
+                            <small class="text-muted">({{ post.category.name }})</small>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-info">
+            Henüz hiç yazı yok.
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="archive-stats mt-5">
+    <div class="row">
+        <div class="col-md-3 mb-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Toplam Yazı</h5>
+                    <p class="card-text display-4">{{ posts.count }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Kategori</h5>
+                    <p class="card-text display-4">{{ categories.count }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Etiket</h5>
+                    <p class="card-text display-4">{{ tags.count }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Yorum</h5>
+                    <p class="card-text display-4">{{ comments.count }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

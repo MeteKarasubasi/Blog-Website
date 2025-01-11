@@ -1,0 +1,68 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}{{ tag.name }} - Blog{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">{{ tag.name }} Etiketli Yazılar</h1>
+
+{% for post in posts %}
+<div class="card mb-4">
+    {% if post.featured_image %}
+    <img src="{{ post.featured_image.url }}" class="card-img-top" alt="{{ post.title }}">
+    {% endif %}
+    <div class="card-body">
+        <h2 class="card-title">{{ post.title }}</h2>
+        <p class="text-muted">
+            <small>
+                {{ post.published_date|date:"d F Y" }} tarihinde 
+                {{ post.author.get_full_name|default:post.author.username }} tarafından yazıldı
+            </small>
+        </p>
+        <p class="card-text">{{ post.excerpt }}</p>
+        <div class="mb-3">
+            <span class="badge bg-primary">{{ post.category.name }}</span>
+            {% for post_tag in post.tags.all %}
+            <span class="badge bg-secondary">{{ post_tag.name }}</span>
+            {% endfor %}
+        </div>
+        <a href="{% url 'blog:post_detail' post.slug %}" class="btn btn-primary">Devamını Oku</a>
+    </div>
+</div>
+{% empty %}
+<div class="alert alert-info">
+    Bu etikete sahip henüz blog yazısı bulunmamaktadır.
+</div>
+{% endfor %}
+
+{% if posts.has_other_pages %}
+<nav aria-label="Sayfalama">
+    <ul class="pagination justify-content-center">
+        {% if posts.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ posts.previous_page_number }}">&laquo;</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">&laquo;</span>
+        </li>
+        {% endif %}
+
+        {% for i in posts.paginator.page_range %}
+        <li class="page-item {% if posts.number == i %}active{% endif %}">
+            <a class="page-link" href="?page={{ i }}">{{ i }}</a>
+        </li>
+        {% endfor %}
+
+        {% if posts.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ posts.next_page_number }}">&raquo;</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+            <span class="page-link">&raquo;</span>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+{% endblock %} 

@@ -1,0 +1,466 @@
+/* Google Fonts - Modern Tech Yazı Tipleri */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@400;500;600;700;800&family=JetBrains+Mono:wght@100;200;300;400;500;600;700&display=swap');
+
+/* Renk Değişkenleri - Neon/Tech Teması */
+:root {
+    /* Ana Renkler - Neon Efektli */
+    --primary-color: #00ffd5;     /* Neon Cyan */
+    --primary-light: #7affeb;     /* Açık Neon Cyan */
+    --primary-dark: #00ccaa;      /* Koyu Neon Cyan */
+    --secondary-color: #ff00ff;   /* Neon Magenta */
+    --secondary-light: #ff7aff;   /* Açık Neon Magenta */
+    --secondary-dark: #cc00cc;    /* Koyu Neon Magenta */
+    
+    /* Arka Plan ve Yüzey Renkleri - Koyu Tech Teması */
+    --background-color: #0a0b1e;  /* Çok Koyu Lacivert */
+    --surface-color: #12142d;     /* Koyu Lacivert */
+    --surface-light: #1a1f3d;     /* Orta Lacivert */
+    --card-bg: rgba(18, 20, 45, 0.95);  /* Yarı Saydam Koyu Lacivert */
+    
+    /* Metin Renkleri */
+    --text-primary: #ffffff;      /* Beyaz */
+    --text-secondary: #e2e8ff;    /* Açık Mavi-Beyaz */
+    --text-tertiary: #b4c4ff;     /* Açık Mavi */
+    --text-muted: #8a98ba;        /* Gri-Mavi */
+    
+    /* Diğer Renkler */
+    --border-color: #2a2f5a;      /* Orta Lacivert Border */
+    --success-color: #00ff9d;     /* Neon Yeşil */
+    --warning-color: #ffbb00;     /* Neon Sarı */
+    --error-color: #ff0055;       /* Neon Kırmızı */
+    --info-color: #00bbff;        /* Neon Mavi */
+    
+    /* Gölge Efektleri */
+    --neon-shadow: 0 0 10px rgba(0, 255, 213, 0.5);
+    --text-shadow: 0 0 15px rgba(0, 255, 213, 0.3);
+    --box-shadow: 0 8px 32px rgba(0, 255, 213, 0.15);
+}
+
+/* Temel Stil Tanımlamaları */
+body {
+    font-family: 'Space Grotesk', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-primary);
+    line-height: 1.7;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(0, 255, 213, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(255, 0, 255, 0.05) 0%, transparent 20%);
+    background-attachment: fixed;
+}
+
+/* Başlık Stilleri */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+h1.card-title.mb-4 {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.3;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.02em;
+}
+
+/* Özel başlık stilleri */
+h1.card-title.mb-4 {
+    color: var(--text-primary) !important;
+    text-shadow: var(--text-shadow);
+    background: linear-gradient(90deg, var(--text-primary), var(--text-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 2.5rem;
+    margin-bottom: 2rem !important;
+}
+
+/* Kod ve Teknik Metinler */
+code, pre, .tech-text {
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: -0.02em;
+}
+
+/* Kart Stilleri */
+.card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 255, 213, 0.2);
+}
+
+.card-header {
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+}
+
+/* Form Elemanları */
+.form-control {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    color: var(--text-primary) !important;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 255, 213, 0.1);
+}
+
+/* Placeholder Stilleri */
+.form-control::placeholder,
+input::placeholder,
+textarea::placeholder,
+select::placeholder {
+    color: var(--text-secondary) !important;
+    opacity: 0.8;
+}
+
+/* Seçili Placeholder */
+.form-control:focus::placeholder,
+input:focus::placeholder,
+textarea:focus::placeholder,
+select:focus::placeholder {
+    color: var(--text-primary) !important;
+    opacity: 0.9;
+}
+
+/* Arama Kutusu Özel Stil */
+.search-input::placeholder,
+input[type="search"]::placeholder {
+    color: var(--text-primary) !important;
+    opacity: 0.9;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+}
+
+/* Buton Stilleri */
+.btn {
+    border-radius: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    border: none;
+    color: var(--background-color);
+    box-shadow: var(--neon-shadow);
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    background: var(--primary-light);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(0, 255, 213, 0.4);
+    color: var(--background-color);
+    font-weight: 600;
+}
+
+/* Profil Kartı Stilleri */
+.profile-card {
+    background: linear-gradient(135deg, 
+        rgba(18, 20, 45, 0.95) 0%, 
+        rgba(26, 31, 61, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--box-shadow);
+}
+
+.profile-avatar {
+    border: 3px solid var(--primary-color);
+    box-shadow: var(--neon-shadow);
+}
+
+/* Sosyal Medya Butonları */
+.social-links .btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    line-height: 40px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.social-links .btn:hover {
+    background: var(--primary-color);
+    color: var(--background-color);
+    transform: translateY(-3px);
+    box-shadow: var(--neon-shadow);
+}
+
+/* Metin Stilleri */
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+/* Özel Animasyonlar */
+@keyframes neonPulse {
+    0% { box-shadow: 0 0 10px rgba(0, 255, 213, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(0, 255, 213, 0.7); }
+    100% { box-shadow: 0 0 10px rgba(0, 255, 213, 0.5); }
+}
+
+.neon-effect {
+    animation: neonPulse 2s infinite;
+}
+
+/* Responsive Ayarlar */
+@media (max-width: 768px) {
+    .card {
+        margin: 1rem 0;
+    }
+    
+    .profile-card {
+        padding: 1rem;
+    }
+    
+    .btn {
+        padding: 0.5rem 1rem;
+    }
+}
+
+/* Özel Sınıf Kombinasyonları */
+.tech-card {
+    background: linear-gradient(135deg, 
+        rgba(18, 20, 45, 0.95) 0%, 
+        rgba(26, 31, 61, 0.95) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--box-shadow);
+}
+
+.tech-text {
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+}
+
+/* Form Grupları */
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-label,
+.form-check-label,
+label {
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+/* Register/Login Form Stilleri */
+.auth-form li,
+.register-form li,
+.login-form li,
+.auth-form ul li,
+.register-form ul li,
+.login-form ul li,
+#div_id_password1 ul li,
+#div_id_password2 ul li {
+    color: var(--text-primary) !important;
+    margin-bottom: 0.5rem;
+    list-style: none;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* Şifre yardım metinleri için özel stil */
+.password-help-text li,
+#div_id_password1 .help-block li,
+#div_id_password2 .help-block li,
+.help-text li {
+    color: var(--text-secondary) !important;
+    font-size: 0.85rem;
+    margin-bottom: 0.3rem;
+    padding-left: 1rem;
+    position: relative;
+}
+
+.password-help-text li::before,
+#div_id_password1 .help-block li::before,
+#div_id_password2 .help-block li::before,
+.help-text li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--primary-color);
+}
+
+/* Form içindeki tüm metin elementleri */
+.auth-form *,
+.register-form *,
+.login-form * {
+    color: var(--text-primary) !important;
+}
+
+/* Form içindeki linkler */
+.auth-form a,
+.register-form a,
+.login-form a {
+    color: var(--primary-color) !important;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.auth-form a:hover,
+.register-form a:hover,
+.login-form a:hover {
+    color: var(--primary-light) !important;
+    text-shadow: var(--text-shadow);
+}
+
+/* Özel Efektler */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--box-shadow);
+}
+
+/* Navbar Stilleri */
+.navbar {
+    background: rgba(10, 11, 30, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.navbar-brand {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+/* Footer Stilleri */
+footer {
+    background: var(--surface-color);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2rem 0;
+}
+
+/* Badge Stilleri */
+.badge {
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+.badge-primary {
+    background: var(--primary-color);
+    color: var(--background-color);
+}
+
+/* Alert Stilleri */
+.alert {
+    background: var(--surface-light);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    border-radius: 0.75rem;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10px);
+}
+
+.alert-success {
+    background: rgba(0, 255, 157, 0.1);
+    border-color: var(--success-color);
+    color: var(--success-color);
+}
+
+.alert-warning {
+    background: rgba(255, 187, 0, 0.1);
+    border-color: var(--warning-color);
+    color: var(--warning-color);
+}
+
+.alert-danger {
+    background: rgba(255, 0, 85, 0.1);
+    border-color: var(--error-color);
+    color: var(--error-color);
+}
+
+.alert-info {
+    background: rgba(0, 187, 255, 0.1);
+    border-color: var(--info-color);
+    color: var(--info-color);
+}
+
+/* Şifre Gösterme Butonu */
+.password-toggle-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.password-toggle-btn:hover {
+    color: var(--primary-color);
+}
+
+.password-toggle-btn i {
+    font-size: 1.1rem;
+}
+
+/* Şifre Input Container */
+.password-input-container {
+    position: relative;
+}
+
+/* Dropdown Menü */
+.dropdown-menu {
+    background: var(--surface-light);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    box-shadow: var(--box-shadow);
+    backdrop-filter: blur(10px);
+}
+
+.dropdown-item {
+    color: var(--text-primary);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--primary-color);
+}
+
+.dropdown-divider {
+    border-color: var(--border-color);
+    margin: 0.5rem 0;
+}
+
+.dropdown-menu .fas,
+.dropdown-menu .far,
+.dropdown-menu .fab {
+    width: 20px;
+    text-align: center;
+    color: var(--primary-color);
+}

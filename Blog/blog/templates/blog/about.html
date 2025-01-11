@@ -1,0 +1,244 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Hakkımda - Blog{% endblock %}
+
+{% block content %}
+<div class="about-page">
+    <header class="mb-5">
+        <h1 class="display-4 mb-4">Hakkımda</h1>
+        <div class="border-bottom border-3 mb-4"></div>
+    </header>
+    
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <div class="profile-card card text-center">
+                <div class="card-body">
+                    <div class="profile-image mb-4">
+                        <img src="https://via.placeholder.com/400" alt="Profil Fotoğrafı" class="img-fluid rounded-circle" style="width: 200px; height: 200px; object-fit: cover;">
+                    </div>
+                    <h3 class="card-title">Merhaba, Ben [Adınız]</h3>
+                    <p class="lead text-muted">Web Geliştirici & Teknoloji Tutkunu</p>
+                    <div class="social-links mt-4">
+                        <a href="#" class="btn btn-outline-primary me-2" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-primary me-2" title="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-primary me-2" title="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="btn btn-outline-primary" title="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-lg-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h4 class="card-title mb-4">
+                        <i class="fas fa-user me-2"></i>Hakkımda
+                    </h4>
+                    <p class="lead">Web geliştirici ve teknoloji tutkunuyum.</p>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">
+                                <i class="fas fa-code me-2"></i>Yetenekler
+                            </h4>
+                            <div class="skills">
+                                <div class="skill-item mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="skill-name">Python</span>
+                                        <span class="skill-percentage">90%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 90%" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="skill-name">Django</span>
+                                        <span class="skill-percentage">85%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item mb-3">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="skill-name">JavaScript</span>
+                                        <span class="skill-percentage">80%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                                <div class="skill-item">
+                                    <div class="d-flex justify-content-between mb-1">
+                                        <span class="skill-name">HTML/CSS</span>
+                                        <span class="skill-percentage">95%</span>
+                                    </div>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 95%" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">
+                                <i class="fas fa-graduation-cap me-2"></i>Eğitim
+                            </h4>
+                            <div class="timeline">
+                                <div class="timeline-item pb-3">
+                                    <h5>Bilgisayar Mühendisliği</h5>
+                                    <p class="text-muted mb-2">XYZ Üniversitesi</p>
+                                    <p class="text-muted"><i class="fas fa-calendar-alt me-2"></i>2018-2022</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h4 class="card-title mb-4">
+                                <i class="fas fa-briefcase me-2"></i>Deneyim
+                            </h4>
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <h5>Kıdemli Web Geliştirici</h5>
+                                    <p class="text-muted mb-2">ABC Teknoloji</p>
+                                    <p class="text-muted mb-2"><i class="fas fa-calendar-alt me-2"></i>2022-Günümüz</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="interests mt-4">
+        <h4 class="mb-4">
+            <i class="fas fa-heart me-2"></i>İlgi Alanları
+        </h4>
+        <div class="row">
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <div class="interest-icon mb-3">
+                            <i class="fas fa-code fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="card-title">Programlama</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <div class="interest-icon mb-3">
+                            <i class="fas fa-book fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="card-title">Okuma</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <div class="interest-icon mb-3">
+                            <i class="fas fa-camera fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="card-title">Fotoğrafçılık</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 mb-4">
+                <div class="card text-center h-100">
+                    <div class="card-body">
+                        <div class="interest-icon mb-3">
+                            <i class="fas fa-plane fa-3x text-primary"></i>
+                        </div>
+                        <h5 class="card-title">Seyahat</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block extra_css %}
+<style>
+    .profile-card {
+        border: none;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    .social-links .btn {
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+
+    .social-links .btn:hover {
+        transform: translateY(-3px);
+    }
+
+    .progress {
+        height: 8px;
+        border-radius: 4px;
+    }
+
+    .progress-bar {
+        background-color: var(--bs-primary);
+    }
+
+    .timeline-item {
+        position: relative;
+        padding-left: 20px;
+        border-left: 2px solid var(--bs-primary);
+    }
+
+    .timeline-item:last-child {
+        border-left: none;
+    }
+
+    .interest-icon {
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .card {
+        border: none;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+</style>
+{% endblock %}
+{% endblock %} 

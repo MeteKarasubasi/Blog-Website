@@ -1,0 +1,172 @@
+{% extends 'blog/panel/base.html' %}
+{% load static %}
+
+{% block title %}
+{% if post %}Yazı Düzenle{% else %}Yeni Yazı{% endif %} - Yönetim Paneli
+{% endblock %}
+
+{% block page_title %}
+{% if post %}Yazı Düzenle{% else %}Yeni Yazı{% endif %}
+{% endblock %}
+
+{% block page_actions %}
+<div class="btn-group">
+    <a href="{% url 'blog:panel_posts' %}" class="btn btn-secondary">
+        <i class="fas fa-arrow-left me-1"></i>Geri Dön
+    </a>
+    {% if post %}
+    <a href="{% url 'blog:post_detail' post.slug %}" class="btn btn-info" target="_blank">
+        <i class="fas fa-eye me-1"></i>Görüntüle
+    </a>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
+<style>
+    .select2-container--bootstrap-5 {
+        width: 100% !important;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-body">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="row g-4">
+                <!-- Sol Kolon -->
+                <div class="col-lg-8">
+                    <!-- Başlık -->
+                    <div class="mb-3">
+                        <label for="{{ form.title.id_for_label }}" class="form-label">Başlık</label>
+                        {{ form.title }}
+                        {% if form.title.errors %}
+                        <div class="invalid-feedback d-block">
+                            {{ form.title.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- İçerik -->
+                    <div class="mb-3">
+                        <label for="{{ form.content.id_for_label }}" class="form-label">İçerik</label>
+                        {{ form.content }}
+                        {% if form.content.errors %}
+                        <div class="invalid-feedback d-block">
+                            {{ form.content.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Özet -->
+                    <div class="mb-3">
+                        <label for="{{ form.excerpt.id_for_label }}" class="form-label">Özet</label>
+                        {{ form.excerpt }}
+                        {% if form.excerpt.errors %}
+                        <div class="invalid-feedback d-block">
+                            {{ form.excerpt.errors }}
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Sağ Kolon -->
+                <div class="col-lg-4">
+                    <!-- Durum -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Durum</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="{{ form.status.id_for_label }}" class="form-label">Yayın Durumu</label>
+                                {{ form.status }}
+                                {% if form.status.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.status.errors }}
+                                </div>
+                                {% endif %}
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Kaydet</button>
+                        </div>
+                    </div>
+
+                    <!-- Kategori -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Kategori</h5>
+                        </div>
+                        <div class="card-body">
+                            {{ form.category }}
+                            {% if form.category.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ form.category.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Etiketler -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Etiketler</h5>
+                        </div>
+                        <div class="card-body">
+                            {{ form.tags }}
+                            {% if form.tags.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ form.tags.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Öne Çıkan Görsel -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title mb-0">Öne Çıkan Görsel</h5>
+                        </div>
+                        <div class="card-body">
+                            {% if post and post.featured_image %}
+                            <img src="{{ post.featured_image.url }}" alt="{{ post.title }}" class="img-fluid mb-3">
+                            {% endif %}
+                            {{ form.featured_image }}
+                            {% if form.featured_image.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ form.featured_image.errors }}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Select2 için
+        $('#{{ form.category.id_for_label }}').select2({
+            theme: 'bootstrap-5',
+            width: '100%'
+        });
+        
+        $('#{{ form.tags.id_for_label }}').select2({
+            theme: 'bootstrap-5',
+            width: '100%',
+            tags: true,
+            tokenSeparators: [',']
+        });
+    });
+</script>
+{% endblock %} 

@@ -1,0 +1,33 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}Hakkımda{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <article class="blog-post">
+                <h1 class="mb-4">Hakkımda</h1>
+                <div class="blog-post-content">
+                    <!-- Buraya kendi hakkınızda bilgileri ekleyebilirsiniz -->
+                    <p>Merhaba! Ben [Adınız Soyadınız].</p>
+                    <p>Buraya kendiniz hakkında bilgiler ekleyebilirsiniz. Örneğin:</p>
+                    <ul>
+                        <li>Eğitim bilgileriniz</li>
+                        <li>İş deneyimleriniz</li>
+                        <li>İlgi alanlarınız</li>
+                        <li>Yetenekleriniz</li>
+                        <li>Projeleriniz</li>
+                    </ul>
+                    <p>Daha fazla bilgi ekleyebilirsiniz...</p>
+                </div>
+            </article>
+        </div>
+        
+        <div class="col-lg-4">
+            {% include 'blog/includes/sidebar.html' %}
+        </div>
+    </div>
+</div>
+{% endblock %} 

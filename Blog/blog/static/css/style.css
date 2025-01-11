@@ -1,0 +1,71 @@
+/* Temel Değişkenler */
+:root {
+    --text-primary: #ffffff;
+    --surface-color: #0a0b1e;
+    --primary-color: #00ffd5;
+    --hover-bg: rgba(255, 255, 255, 0.15);
+}
+
+/* Alert Stilleri */
+.alert {
+    background: var(--surface-color) !important;
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    text-shadow: none !important;
+    padding: 1rem !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Profil Dropdown Menüsü */
+.dropdown-menu {
+    background: var(--surface-color) !important;
+    border: 2px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+    padding: 0.5rem !important;
+}
+
+.dropdown-menu .dropdown-item,
+.dropdown-item {
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    text-shadow: none !important;
+    padding: 0.75rem 1rem !important;
+    margin: 0.25rem 0 !important;
+    border-radius: 4px !important;
+}
+
+.dropdown-menu .dropdown-item:hover,
+.dropdown-item:hover {
+    background: var(--hover-bg) !important;
+    color: var(--primary-color) !important;
+}
+
+/* Giriş/Çıkış Mesajları */
+.alert-success,
+.alert-info,
+.alert-warning,
+.alert-danger {
+    background: var(--surface-color) !important;
+    color: var(--text-primary) !important;
+    font-weight: 600 !important;
+    text-shadow: none !important;
+    letter-spacing: 0.3px !important;
+}
+
+/* Kapatma Butonu */
+.btn-close {
+    filter: invert(1) !important;
+    opacity: 0.9 !important;
+    padding: 1rem !important;
+}
+
+.btn-close:hover {
+    opacity: 1 !important;
+}
+
+/* Divider Stili */
+.dropdown-divider {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+    margin: 0.5rem 0 !important;
+} 

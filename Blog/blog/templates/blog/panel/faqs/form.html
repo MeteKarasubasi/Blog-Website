@@ -1,0 +1,97 @@
+{% extends "blog/panel/base.html" %}
+
+{% block title %}
+    {% if faq %}SSS Düzenle{% else %}Yeni SSS{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3">
+            {% if faq %}
+                SSS Düzenle
+            {% else %}
+                Yeni SSS Ekle
+            {% endif %}
+        </h1>
+        <a href="{% url 'blog:panel_faqs' %}" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Geri Dön
+        </a>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    <label for="{{ form.question.id_for_label }}" class="form-label">Soru</label>
+                    {{ form.question }}
+                    {% if form.question.errors %}
+                        <div class="invalid-feedback d-block">
+                            {{ form.question.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.answer.id_for_label }}" class="form-label">Cevap</label>
+                    {{ form.answer }}
+                    {% if form.answer.errors %}
+                        <div class="invalid-feedback d-block">
+                            {{ form.answer.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="{{ form.order.id_for_label }}" class="form-label">Sıra</label>
+                            {{ form.order }}
+                            {% if form.order.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.order.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <div class="form-check mt-4">
+                                {{ form.is_active }}
+                                <label class="form-check-label" for="{{ form.is_active.id_for_label }}">
+                                    Aktif
+                                </label>
+                            </div>
+                            {% if form.is_active.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ form.is_active.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-end">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i> Kaydet
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Form alanlarını Bootstrap sınıflarıyla stil
+    document.querySelectorAll('input:not([type="checkbox"]), textarea').forEach(element => {
+        element.classList.add('form-control');
+    });
+    document.querySelectorAll('input[type="checkbox"]').forEach(element => {
+        element.classList.add('form-check-input');
+    });
+</script>
+{% endblock %} 

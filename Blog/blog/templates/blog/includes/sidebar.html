@@ -1,0 +1,61 @@
+{% load static %}
+
+<div class="sidebar">
+    <!-- Arama Kutusu -->
+    <div class="sidebar-section">
+        <h4>Blog'da Ara</h4>
+        <form action="{% url 'blog:search' %}" method="get">
+            <div class="input-group">
+                <input type="text" class="form-control" name="q" placeholder="Ara...">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Kategoriler -->
+    <div class="sidebar-section">
+        <h4>Kategoriler</h4>
+        <ul class="list-unstyled">
+            {% for category in categories %}
+            {% if category.slug %}
+            <li>
+                <a href="{% url 'blog:category_detail' category.slug %}">
+                    {{ category.name }} ({{ category.posts.count }})
+                </a>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+
+    <!-- Etiketler -->
+    <div class="sidebar-section">
+        <h4>Etiketler</h4>
+        <div class="tags">
+            {% for tag in tags %}
+            {% if tag.slug %}
+            <a href="{% url 'blog:tag_detail' tag.slug %}" class="tag">
+                {{ tag.name }}
+            </a>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Popüler Yazılar -->
+    <div class="sidebar-section">
+        <h4>Popüler Yazılar</h4>
+        <ul class="list-unstyled">
+            {% for post in popular_posts %}
+            {% if post.slug %}
+            <li>
+                <a href="{% url 'blog:post_detail' post.slug %}">{{ post.title }}</a>
+                <small>({{ post.hit_count.hits }} görüntülenme)</small>
+            </li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </div>
+</div> 

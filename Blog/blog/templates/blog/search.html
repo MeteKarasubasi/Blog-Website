@@ -1,0 +1,96 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Arama Sonuçları - Blog{% endblock %}
+
+{% block content %}
+<div class="search-results">
+    <h1 class="mb-4">Arama Sonuçları</h1>
+    
+    <div class="search-form mb-4">
+        <form action="{% url 'blog:search' %}" method="get" class="d-flex">
+            <input type="search" name="q" class="form-control me-2" placeholder="Ara..." value="{{ request.GET.q }}">
+            <button type="submit" class="btn btn-primary">Ara</button>
+        </form>
+    </div>
+
+    {% if request.GET.q %}
+        {% if posts %}
+            <p class="text-muted mb-4">"{{ request.GET.q }}" için {{ page_obj.paginator.count }} sonuç bulundu.</p>
+            
+            {% for post in posts %}
+            <article class="card mb-4">
+                {% if post.featured_image %}
+                <img src="{{ post.featured_image.url }}" class="card-img-top" alt="{{ post.title }}">
+                {% endif %}
+                <div class="card-body">
+                    <h2 class="card-title">
+                        <a href="{% url 'blog:post_detail' post.slug %}" class="text-decoration-none text-dark">
+                            {{ post.title }}
+                        </a>
+                    </h2>
+                    <p class="card-text text-muted">
+                        <small>
+                            <i class="fas fa-user"></i> {{ post.author.get_full_name|default:post.author.username }} |
+                            <i class="fas fa-calendar"></i> {{ post.published_date|date:"d F Y" }} |
+                            <i class="fas fa-folder"></i> {{ post.category.name }}
+                        </small>
+                    </p>
+                    {% if post.excerpt %}
+                    <p class="card-text">{{ post.excerpt }}</p>
+                    {% else %}
+                    <p class="card-text">{{ post.content|truncatewords:50 }}</p>
+                    {% endif %}
+                    <a href="{% url 'blog:post_detail' post.slug %}" class="btn btn-primary">Devamını Oku</a>
+                </div>
+                <div class="card-footer text-muted">
+                    <i class="fas fa-tags"></i>
+                    {% for tag in post.tags.all %}
+                    <a href="{% url 'blog:tag_detail' tag.slug %}" class="text-decoration-none">
+                        #{{ tag.name }}
+                    </a>{% if not forloop.last %}, {% endif %}
+                    {% endfor %}
+                </div>
+            </article>
+            {% endfor %}
+
+            {% if is_paginated %}
+            <nav aria-label="Sayfalama">
+                <ul class="pagination justify-content-center">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?q={{ request.GET.q }}&page={{ page_obj.previous_page_number }}">Önceki</a>
+                    </li>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                    <li class="page-item active">
+                        <span class="page-link">{{ num }}</span>
+                    </li>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <li class="page-item">
+                        <a class="page-link" href="?q={{ request.GET.q }}&page={{ num }}">{{ num }}</a>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?q={{ request.GET.q }}&page={{ page_obj.next_page_number }}">Sonraki</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+            {% endif %}
+        {% else %}
+            <div class="alert alert-info">
+                "{{ request.GET.q }}" için sonuç bulunamadı.
+            </div>
+        {% endif %}
+    {% else %}
+        <div class="alert alert-info">
+            Lütfen arama yapmak için bir anahtar kelime girin.
+        </div>
+    {% endif %}
+</div>
+{% endblock %} 

@@ -1,0 +1,91 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}Sıkça Sorulan Sorular - Blog{% endblock %}
+
+{% block content %}
+<div class="faq-page">
+    <h1 class="mb-4">Sıkça Sorulan Sorular</h1>
+    
+    <div class="accordion" id="faqAccordion">
+        <!-- Blog Hakkında -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Bu blog ne hakkında?
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Bu blog, teknoloji, web geliştirme, programlama ve yazılım dünyasındaki deneyimlerimi paylaştığım kişisel bir platformdur. Amacım, öğrendiklerimi paylaşmak ve yazılım topluluğuna katkıda bulunmaktır.
+                </div>
+            </div>
+        </div>
+
+        <!-- İçerik Güncelleme -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Ne sıklıkla yeni içerik yayınlanıyor?
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Genellikle haftada en az bir yeni yazı yayınlamaya çalışıyorum. Ancak bu, konunun kapsamına ve araştırma gereksinimine bağlı olarak değişebilir. Kaliteli içerik üretmeye öncelik veriyorum.
+                </div>
+            </div>
+        </div>
+
+        <!-- İçerik Önerileri -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    İçerik önerisinde bulunabilir miyim?
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Elbette! İletişim sayfasından veya yazıların altındaki yorum bölümünden içerik önerilerinde bulunabilirsiniz. Önerileriniz benim için çok değerli ve blog içeriğini şekillendirmemde yardımcı oluyor.
+                </div>
+            </div>
+        </div>
+
+        <!-- Teknik Altyapı -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    Blog hangi teknolojilerle geliştirildi?
+                </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Bu blog Python Django framework'ü kullanılarak geliştirildi. Veritabanı olarak PostgreSQL, ön yüz geliştirmesi için Bootstrap kullanıldı. Tüm kaynak kodu açık ve GitHub üzerinden erişilebilir durumda.
+                </div>
+            </div>
+        </div>
+
+        <!-- İletişim -->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFive">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                    Nasıl iletişime geçebilirim?
+                </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                    Benimle iletişime geçmek için İletişim sayfasındaki formu kullanabilir, sosyal medya hesaplarımdan bana ulaşabilir veya doğrudan ornek@email.com adresine e-posta gönderebilirsiniz.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="additional-info mt-5">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Başka Sorularınız mı Var?</h5>
+                <p class="card-text">Burada yanıtını bulamadığınız sorular için lütfen İletişim sayfasından bana ulaşın.</p>
+                <a href="{% url 'blog:contact' %}" class="btn btn-primary">İletişime Geç</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

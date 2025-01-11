@@ -1,0 +1,245 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+
+{% block title %}Profil - {{ user.username }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card profile-card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h2 class="mb-0">Profil</h2>
+                    <div>
+                        <a href="{% url 'blog:change_password' %}" class="btn btn-warning me-2">
+                            <i class="fas fa-key me-2"></i>Şifre Değiştir
+                        </a>
+                        <a href="{% url 'blog:profile_edit' %}" class="btn btn-primary">
+                            <i class="fas fa-edit me-2"></i>Profili Düzenle
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <img src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}" 
+                             alt="{{ user.username }}" 
+                             class="profile-avatar mb-3">
+                        <h3>{{ user.username }}</h3>
+                        <p class="text-muted">{{ user.email }}</p>
+                        
+                        {% if user.profile.occupation %}
+                        <p class="text-muted mb-2">{{ user.profile.occupation }}</p>
+                        {% endif %}
+                        
+                        {% if user.profile.education %}
+                        <p class="text-muted mb-2">{{ user.profile.education }}</p>
+                        {% endif %}
+                        
+                        <div class="social-links mt-3">
+                            {% if user.profile.facebook %}
+                            <a href="{{ user.profile.facebook }}" target="_blank" class="btn btn-outline-primary btn-sm me-2">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            {% endif %}
+                            
+                            {% if user.profile.twitter %}
+                            <a href="{{ user.profile.twitter }}" target="_blank" class="btn btn-outline-info btn-sm me-2">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            {% endif %}
+                            
+                            {% if user.profile.instagram %}
+                            <a href="{{ user.profile.instagram }}" target="_blank" class="btn btn-outline-danger btn-sm me-2">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            {% endif %}
+                            
+                            {% if user.profile.linkedin %}
+                            <a href="{{ user.profile.linkedin }}" target="_blank" class="btn btn-outline-primary btn-sm me-2">
+                                <i class="fab fa-linkedin"></i>
+                            </a>
+                            {% endif %}
+                            
+                            {% if user.profile.github %}
+                            <a href="{{ user.profile.github }}" target="_blank" class="btn btn-outline-dark btn-sm me-2">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <div class="profile-info">
+                        <div class="row">
+                            <div class="col-md-6">
+                                {% if user.profile.bio %}
+                                <div class="mb-4">
+                                    <h5>Hakkımda</h5>
+                                    <p>{{ user.profile.bio }}</p>
+                                </div>
+                                {% endif %}
+                                
+                                {% if user.profile.interests %}
+                                <div class="mb-4">
+                                    <h5>İlgi Alanları</h5>
+                                    <div class="interests-tags">
+                                        {% for interest in user.profile.get_interests_list %}
+                                        <span class="badge bg-primary me-2 mb-2">{{ interest }}</span>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="personal-info">
+                                    {% if user.profile.location %}
+                                    <div class="mb-3">
+                                        <h6><i class="fas fa-map-marker-alt me-2"></i>Konum</h6>
+                                        <p>{{ user.profile.location }}</p>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if user.profile.website %}
+                                    <div class="mb-3">
+                                        <h6><i class="fas fa-globe me-2"></i>Web Sitesi</h6>
+                                        <a href="{{ user.profile.website }}" target="_blank">{{ user.profile.website }}</a>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if user.profile.birth_date %}
+                                    <div class="mb-3">
+                                        <h6><i class="fas fa-birthday-cake me-2"></i>Yaş</h6>
+                                        <p>{{ user.profile.get_age }} yaşında</p>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if user.profile.gender %}
+                                    <div class="mb-3">
+                                        <h6><i class="fas fa-user me-2"></i>Cinsiyet</h6>
+                                        <p>{{ user.profile.get_gender_display }}</p>
+                                    </div>
+                                    {% endif %}
+                                    
+                                    {% if user.profile.phone %}
+                                    <div class="mb-3">
+                                        <h6><i class="fas fa-phone me-2"></i>Telefon</h6>
+                                        <p>{{ user.profile.phone }}</p>
+                                    </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* Temel stil tanımlamaları */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+p, .p,
+.text-muted,
+.card-header *,
+.card-body * {
+    color: #fff !important;
+}
+
+/* Özel sınıf kombinasyonları */
+.card h2.mb-0,
+.card h2.h4.mb-4,
+.card p.text-muted,
+.card p.text-muted.mb-4,
+.card p.text-muted.mb-2,
+.card h5.border-bottom.pb-2,
+.card h2.h4,
+.card p.text,
+.settings h2.h4.mb-4,
+.settings p.text,
+.account h2.h4.mb-4,
+.account p.text {
+    color: #fff !important;
+}
+
+/* Form elemanları */
+.form-label,
+.form-text {
+    color: #fff !important;
+}
+
+/* Profil kartı içindeki tüm metin elemanları */
+.profile-card h1,
+.profile-card h2,
+.profile-card h3,
+.profile-card h4,
+.profile-card h5,
+.profile-card h6,
+.profile-card p,
+.profile-card span,
+.profile-card a:not(.btn) {
+    color: #fff !important;
+}
+
+/* Profil resmi */
+.profile-avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary-light);
+}
+
+/* Kart stilleri */
+.profile-card {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Profil bilgileri */
+.profile-info {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Sosyal medya butonları */
+.social-links .btn {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    line-height: 40px;
+    border-radius: 50%;
+}
+
+.social-links .btn i {
+    line-height: 40px;
+}
+
+/* İlgi alanları */
+.interests-tags {
+    margin-top: 0.5rem;
+}
+
+.interests-tags .badge {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+}
+
+/* Kişisel bilgiler */
+.personal-info h6 {
+    margin-bottom: 0.5rem;
+}
+
+.personal-info p {
+    margin-bottom: 0;
+    padding-left: 1.8rem;
+}
+
+.personal-info a {
+    padding-left: 1.8rem;
+    display: block;
+    word-break: break-all;
+}
+</style>
+{% endblock %} 
