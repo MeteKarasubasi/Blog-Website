@@ -124,7 +124,7 @@ Bu proje MIT lisansı altında lisanslanmıştır. Detaylar için [LICENSE](LICE
 
 İsmail Mete Karasubasi - [LinkedIn](https://www.linkedin.com/in/ismail-mete-karasuba%C5%9F%C4%B1-253077225/) - ismailmetekarasubasi@gmail.com
 
-Proje Linki: [https://github.com/yourusername/blog](https://github.com/MeteKarasubasi/Blog-Website)
+Proje Linki: [https://github.com/MeteKarasubasi/Blog-Website](https://github.com/MeteKarasubasi/Blog-Website)
 
 ---
 ⭐️ Bu projeyi beğendiyseniz yıldız vermeyi unutmayın! 
